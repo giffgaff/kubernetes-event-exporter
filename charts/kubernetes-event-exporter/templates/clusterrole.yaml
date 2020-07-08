@@ -1,0 +1,23 @@
+{{- if .Values.rbac.create -}}
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "kubernetes-event-exporter.fullname" . }}-nodes
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "kubernetes-event-exporter.name" . }}
+    helm.sh/chart: {{ include "kubernetes-event-exporter.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: Reconcile
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - "nodes"
+  verbs:
+  - "get"
+  - "watch"
+  - "list"
+{{- end -}}
