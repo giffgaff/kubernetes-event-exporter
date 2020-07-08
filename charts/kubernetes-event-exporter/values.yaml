@@ -70,28 +70,4 @@ tolerations: []
 
 affinity: {}
 
-configMaps:
-  config.yaml: |
-    logLevel: error
-    logFormat: json
-    route:
-      routes:
-        - match:
-            - receiver: "dump"
-    receivers:
-      - name: "dump"
-        elasticsearch:
-          hosts:
-          - https://vpc-gg-elasticsearch-test-m4bjq2bgliivv5ponx3ulx4ibm.eu-west-1.es.amazonaws.com
-          index: kube-events
-          # Ca be used optionally for time based indices, accepts Go time formatting directives
-          indexFormat: "kube-events-{2006-01-02}"
-          username: # optional
-          password: # optional
-          cloudID: # optional
-          apiKey: # optional
-          # If set to true, it allows updating the same document in ES (might be useful handling count)
-          useEventID: true
-          layout: # Optional
-          tls: # optional, advanced options for tls
-            insecureSkipVerify: true
+configMaps: []
